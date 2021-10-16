@@ -1,29 +1,30 @@
 package com.alexstark.tests;
 
 import com.alexstark.pages.PracticFormPage;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 public class PracticeFormWithPageObjectTest extends TestBase {
 
     PracticFormPage practicFormPage = new PracticFormPage();
+    Faker faker = new Faker();
 
     private String
-            firstName = "Alexander",
-            lastName = "Derevyanko",
-            email = "alexstark@mail.ru",
+            firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            email = faker.internet().emailAddress(),
             gender = "Male",
-            mobile = "9995551122",
-            day = "20",
-            month = "June",
-            year = "1992",
+            mobile = faker.phoneNumber().subscriberNumber(10),
+            day = "15",
+            month = "May",
+            year = "1995",
             subjects = "Computer science",
             hobbies[]  = {"Sports","Reading"},
-            address = "S.Petersburg,Nevskiy st. house 40",
+            address = faker.address().streetAddress(),
             state = "Rajasthan",
             city = "Jaipur",
             nameOfPicture = "test.jpg",
             exampleModalTitle = "Thanks for submitting the form";
-
 
     @Test
     void fillFormTest() {
