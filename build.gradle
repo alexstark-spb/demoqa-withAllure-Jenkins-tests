@@ -28,6 +28,7 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
+            "org.aeonbits.owner:owner:1.0.12",
             "org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
@@ -43,6 +44,9 @@ compileJava {
 }
 
 tasks.withType(Test) {
+//    systemProperty("environment", System.getProperty("environment", "stage")) // preprod, prod
+
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -51,5 +55,20 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task properties_tests(type: Test) {
+    systemProperty("browserSize", System.getProperty("browserSize", "400x400"))
+    useJUnitPlatform {
+        includeTags "properties"
+    }
+}
+
+task many_tags_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags "properties"
+        includeTags "smoke"
+        excludeTags "prod"
     }
 }
