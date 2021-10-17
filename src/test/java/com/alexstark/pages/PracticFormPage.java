@@ -3,8 +3,11 @@ package com.alexstark.pages;
 import com.alexstark.pages.components.CalendarComponent;
 import com.alexstark.pages.components.CityComponent;
 import com.alexstark.pages.components.StateComponent;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.openqa.selenium.OutputType;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -30,6 +33,7 @@ public class PracticFormPage {
             addressInput = $("#currentAddress"),
             submitButton = $("#submit"),
             uploadPicture = $("#uploadPicture");
+
 
     @Step("Открыть страницу demoqa.com/automation-practice-form")
     public void openPage() {
@@ -121,7 +125,7 @@ public class PracticFormPage {
         $("#example-modal-sizes-title-lg").shouldHave(text(modalTitle));
     }
 
-    @Step("Проверить основной текст во всплывающем меню")
+    @Step("Проверить поле {key} во всплывающем меню")
     public PracticFormPage checkResultBody(String key, String value) {
         $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
         return this;
