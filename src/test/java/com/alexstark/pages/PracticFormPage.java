@@ -120,12 +120,12 @@ public class PracticFormPage {
         submitButton.click();
     }
 
-    @Step("Проверить заголовок во всплывающем меню")
+    @Step("Проверить заголовок в сабмит-форме")
     public void checkResultHeader(String modalTitle) {
         $("#example-modal-sizes-title-lg").shouldHave(text(modalTitle));
     }
 
-    @Step("Проверить поле {key} во всплывающем меню")
+    @Step("Проверить поле {key}")
     public PracticFormPage checkResultBody(String key, String value) {
         $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
         return this;

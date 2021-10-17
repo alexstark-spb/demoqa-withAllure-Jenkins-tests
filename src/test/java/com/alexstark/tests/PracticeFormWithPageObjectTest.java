@@ -6,6 +6,8 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
+
 public class PracticeFormWithPageObjectTest extends TestBase {
 
     private PracticFormPage practicFormPage = new PracticFormPage();
@@ -52,14 +54,16 @@ public class PracticeFormWithPageObjectTest extends TestBase {
                 .typeSubmit();
 
         practicFormPage.checkResultHeader(exampleModalTitle);
-        practicFormPage.checkResultBody("Student Name", firstName + " " + lastName)
-                .checkResultBody("Student Email", email)
-                .checkResultBody("Mobile", mobile)
-                .checkResultBody("Date of Birth", day + " " + month + "," + year)
-                .checkResultBody("Subjects", subjects)
-                .checkResultBody("Hobbies", hobbies[0] + ", " + hobbies[1])
-                .checkResultBody("Picture", nameOfPicture)
-                .checkResultBody("Address", address)
-                .checkResultBody("State and City", state + " " + city);
+        step("Проверить основные поля в сабмит-форме", () -> {
+            practicFormPage.checkResultBody("Student Name", firstName + " " + lastName)
+                    .checkResultBody("Student Email", email)
+                    .checkResultBody("Mobile", mobile)
+                    .checkResultBody("Date of Birth", day + " " + month + "," + year)
+                    .checkResultBody("Subjects", subjects)
+                    .checkResultBody("Hobbies", hobbies[0] + ", " + hobbies[1])
+                    .checkResultBody("Picture", nameOfPicture)
+                    .checkResultBody("Address", address)
+                    .checkResultBody("State and City", state + " " + city);
+        });
     }
 }
