@@ -4,6 +4,7 @@ import com.alexstark.pages.PracticFormPage;
 import com.github.javafaker.Faker;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -30,13 +31,14 @@ public class PracticeFormWithPageObjectTest extends TestBase {
             nameOfPicture = "test.jpg",
             exampleModalTitle = "Thanks for submitting the form";
 
+    @Test
+    @Tag("RegistrationForm")
     @Feature("Forms")
     @Story("Заполнение форм")
     @Owner("Alex Derevyanko")
     @Severity(SeverityLevel.CRITICAL)
     @Link(name = "demoqa", url = "https://demoqa.com/automation-practice-form")
     @DisplayName("Заполнение Student Registration Form")
-    @Test
     void fillFormTest() {
         practicFormPage.openPage();
         practicFormPage.typeFirstName(firstName)
