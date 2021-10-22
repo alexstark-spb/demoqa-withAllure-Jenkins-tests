@@ -71,3 +71,10 @@ task many_tags_tests(type: Test) {
         excludeTags "prod"
     }
 }
+
+task registration_form_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "RegistrationForm"
+    }
+}
+
