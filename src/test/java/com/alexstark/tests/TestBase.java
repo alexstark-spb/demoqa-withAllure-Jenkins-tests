@@ -12,6 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static java.lang.String.format;
 
+
 public class TestBase {
 
     public static CredentialsWorkConfig credentials = ConfigFactory.create(CredentialsWorkConfig.class);
@@ -26,10 +27,13 @@ public class TestBase {
 
         String login = credentials.login();
         String password = credentials.password();
-        String browserURL = System.getProperty("URL", credentials.browserURL());
+        String browserURL = System.getProperty("url", credentials.browserURL());
+        String browser = System.getProperty("browser", "chrome");
 
+
+        Configuration.browser = browser;
+        Configuration.browserSize = "1920x1080";
         Configuration.browserCapabilities = capabilities;
-        Configuration.startMaximized = true;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.remote = format("https://%s:%s@%s", login, password, browserURL);
     }
@@ -38,7 +42,7 @@ public class TestBase {
     public void tearDown() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
-        Attach.browserConsoleLogs();
+//        Attach.browserConsoleLogs();
         Attach.addVideo();
     }
 }
