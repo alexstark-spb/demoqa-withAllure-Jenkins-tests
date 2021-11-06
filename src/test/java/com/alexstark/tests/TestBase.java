@@ -29,10 +29,13 @@ public class TestBase {
         String password = credentials.password();
         String browserURL = System.getProperty("url", credentials.browserURL());
         String browser = System.getProperty("browser", "chrome");
+        String browserSize = System.getProperty("browserSize", "1280x1024");
+        String browserVersion = System.getProperty("browserVersion");
 
 
         Configuration.browser = browser;
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = browserSize;
+        Configuration.browserVersion = browserVersion;
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.remote = format("https://%s:%s@%s", login, password, browserURL);
@@ -42,7 +45,7 @@ public class TestBase {
     public void tearDown() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
-//        Attach.browserConsoleLogs();
+//        Attach.browserConsoleLogs(); // выдает ошибку если запускать код на других браузерах кроме 'Chrome'
         Attach.addVideo();
     }
 }

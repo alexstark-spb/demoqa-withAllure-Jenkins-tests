@@ -39,6 +39,7 @@ public class SystemPropertiesTests {
     @Tag("properties")
     void someTest4() {
         String value = System.getProperty("browser", "chrome");
+        String value2 = System.getProperty("browserSize", "400x400");
         System.out.println(value);
         //  gradle clean properties_tests
         //  chrome
